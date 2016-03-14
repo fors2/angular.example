@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <p><a href="#/list">&lt; list</a></p>
+    
+    TBD: detail view for <span>{{phoneId}}</span>
+    <pre>{{phone | json}}</pre>
+    
+    <div class="phone-images">
+        <img ng-src="{{img}}"
+             class="phone"
+             ng-repeat="img in phone.images"
+             ng-class="{active:mainImageUrl==img}"
+        />
+    </div>
+
+    <ul class="phone-thumbs">
+        <li ng-repeat="img in phone.images">
+            <!-- src="" ng-src="" 結果は同じ -->
+            <!-- ng-clickはクリックアクション -->
+            <img src="{{img}}" ng-mouseenter="setImage(img)" />
+    </ul>
+    
+</div>

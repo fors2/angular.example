@@ -1,0 +1,9 @@
+/* app css stylesheet */
+
+input.ng-invalid {
+    background: rgb(255, 161, 161);
+}
+
+.thumb {
+    max-width: 150px;
+}

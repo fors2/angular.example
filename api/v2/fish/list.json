@@ -1,0 +1,34 @@
+[
+    {
+        "id"        : 1,
+        "name"      : "ma-iwashi", 
+        "price"     : 1200,
+        "img"       : "img/1.png",
+        "priority"  : 1,
+        "stock"     : 199
+    }, 
+    {
+        "id"        : 2,
+        "name"      : "maguro", 
+        "price"     : 1000,
+        "img"       : "img/2.jpg",
+        "priority"  : 2,
+        "stock"     : 0
+    },
+    {
+        "id"        : 3,
+        "name"      : "hirame", 
+        "price"     : 900,
+        "img"       : "img/3.jpg",
+        "priority"  : 3,
+        "stock"     : 9
+    },
+    {
+        "id"        : 4,
+        "name"      : "sa-mon", 
+        "price"     : 1050,
+        "img"       : "img/4.jpg",
+        "priority"  : 4,
+        "stock"     : 999999
+    }
+]

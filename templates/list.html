@@ -1,0 +1,120 @@
+<div id="index_layout" class="clearfix">
+    <div id="advs_area">
+    <section id="search_area" class="row">
+        <form name="myForm">
+        <span class="col-md-2 col-xs-12">
+            <!-- ng-modelはbindとvalidateで必要 -->
+            <!-- validateの結果はclassに反映される ng-valid-{} or ng-invalid-{} -->
+            <input type="text" name="word" ng-model="query" placeholder="検索ワード" id="form_q" class="q col-md-2 input-sm form-control" required ng-maxlength="5" />
+            <span class="error" ng-show="myForm.word.$error.required">Required!</span><br/>
+            <span class="error" ng-show="myForm.word.$error.maxlength">ながすぎぃ</span><br/>
+            <!-- input type="email"のみ -->
+            <span class="error" ng-show="myForm.word.$error.email">まちがい</span><br/>
+            
+            <tt>myForm.word.$valid = {{myForm.word.$valid}}</tt><br/>
+            <tt>myForm.word.$error = {{myForm.word.$error}}</tt><br/>
+            <tt>myForm.$valid = {{myForm.$valid}}</tt><br/>
+            <br/>
+        </span>
+        
+        
+        <span class="col-md-1 col-xs-6">
+            <!-- http://js.studio-kingdom.com/angularjs/ng_directive/select -->
+            <!-- http://www.w3schools.com/angular/tryit.asp?filename=try_ng_select_selected -->
+            <select ng-model="orderProp" class="limit input-sm form-control" ng-options="i as x for (i,x) in optionPrice"></select>
+        </span>
+        
+        
+        <span class="col-md-1 col-xs-6">
+            <select name="limit" id="limit" class="limit input-sm form-control">
+                <option value="50">50件</option><option value="100">100件</option>
+                <option value="200">200件</option><option value="500">500件</option>
+            </select>
+        </span>
+        
+        
+        <span class="col-md-1 col-xs-12 text-right">
+          <a id="search" class="btn btn-default" ng-click="save()" >検索条件保存</a>
+        </span>
+        
+        <span class="col-md-1 col-xs-12 text-right">
+          <a id="search" class="btn btn-default" ng-click="del()" >チェック項目を削除</a>
+        </span>
+        
+        </form>
+    </section>
+    <br/>
+    
+    
+    <section id="summary_area" class="row">
+        <div class="col-md-10">
+            <p>Total number of phones: {{phones.length}}</p>
+            <p ng-bind="query"></p>
+            <p ng-bind-template="Query: {{query}}"></p>
+        </div>
+    </section>
+    
+    
+    <section id="summary_area" class="row">
+
+    <details id="details" ng-open="open">
+        <summary>Checkbox list</summary>
+        <pre>{{chklist | json}}</pre>
+    </details>
+    
+    <table class="advs">
+        <colgroup>
+            <col width=" 5%">
+            <col width=" 5%">
+            <col width="20%">
+            <col width="25%">
+            <col width="25%">
+            <col width="20%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="chkall" ng-click="checkAll()" /></th>
+                <th>index</th>
+                <th>サムネイル</th>
+                <th>名称</th>
+                <th class="sortable" ng-click="sort('price');toggleClass();" ng-class="{'active': ctrPrice}">
+                    価格&emsp;
+                    <i class="fa fa-sort fa-lg" data-id="visit" ng-class="{'fa-sort-down': ctrPriceD, 'fa-sort-up': ctrPriceA}"></i>
+                </th>
+                <th class="sortable" >在庫</th>
+            </tr>
+        </thead>
+        </table>
+    
+        <div id="advs_body">
+            <table class="advs">
+            <colgroup>
+                <col width=" 5%">
+                <col width=" 5%">
+                <col width="20%">
+                <col width="25%">
+                <col width="25%">
+                <col width="20%">
+            </colgroup>
+            
+            <tr ng-repeat="phone in phones | filter:query | orderBy:orderProp">
+                <td class="text-center">
+                    <input type="checkbox"  ng-checked="chklist.indexOf(phone.id) > -1" ng-cloak ng-click="changeChk(phone.id)" />
+                    <!-- ng-click="toggleCheck(phone.id)" -->
+                </td>
+                <td class="text-center">{{$index}}</td>
+                <td class="text-center"><img src="{{phone.img}}" class="thumb"></td>
+                <td><a href="#/detail/{{phone.id}}">{{phone.name}}</a></td>
+                <td>{{phone.price | number_format}}</td>
+                <td>{{phone.stock | number_format}} {{phone.stock | checkmark}}</td>
+            </tr>
+            </table>
+        </div>
+    </section>
+    </div>
+</div>
+
+
+
+    <p>デバッグ</p>
+    <pre>{{phones  | filter:query | orderBy:orderProp | json}}</pre>
